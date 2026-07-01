@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXEC19 - SILVER SHADOW</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: visible; background-color: #000000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        /* Wraps the flashing container safely */
+        #container {
+            display: flex; justify-content: center; align-items: center; flex-grow: 1; width: 100%;
+        }
+        #screamer { 
+            max-width: 600px; max-height: 600px; 
+            image-rendering: pixelated; 
+            image-rendering: crisp-edges;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THE CENTER FLASHING GRAPHIC PANEL -->
+    <div id="container">
+        <img id="screamer" src="EXEC1.gif">
+    </div>
+
+    <!-- AUDIO ENGINE CONVERTED TO MP3 -->
+    <audio id="audio" src="EXEC.mp3" autoplay loop></audio>
+
+    <!-- RETRO METRIC TIMESTAMP AND REGISTRY FOOTER -->
+    <center style="margin-bottom: 25px;">
+        <font face="Courier New, Courier, monospace" color="#FF0000" size="3">
+            <b>01-19-2024</b>
+        </font>
+        <br><br>
+        <font face="Courier New, Courier, monospace" color="#FF0000" size="2">
+            &copy; 2024 Silver Shadow. All rights reserved.
+        </font>
+    </center>
+
+    <!-- FLICKER LOGIC SCRIPT CORE -->
+    <script>
+        const display = document.getElementById('screamer');
+        // Converted to reference your new 16-color glitch GIF assets
+        const img1 = "EXEC1.gif";
+        const img2 = "EXEC2.gif";
+        let toggle = false;
+        
+        setInterval(() => {
+            display.src = toggle ? img1 : img2;
+            toggle = !toggle;
+        }, 50);
+
+        window.addEventListener('load', () => {
+            document.getElementById('audio').play().catch(() => {});
+        });
+    </script>
+</body>
+</html>
