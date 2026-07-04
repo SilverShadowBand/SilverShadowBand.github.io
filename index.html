@@ -17,7 +17,7 @@
         }
 
         /* Floating layout positions pushed farther out to guarantee zero table overlapping */
-        /* Maintained at your precise 145px width preference layout scale */
+        /* Maintained at your precise 140px width preference layout scale */
         .float-gif-left1  { position: absolute; top: 160px; left: 2%; }
         .float-gif-left2  { position: absolute; top: 500px; left: 1%; }
         .float-gif-left3  { position: absolute; top: 840px; left: 2%; }
@@ -25,30 +25,18 @@
         .float-gif-right1 { position: absolute; top: 160px; right: 2%; }
         .float-gif-right2 { position: absolute; top: 500px; right: 1%; }
         .float-gif-right3 { position: absolute; top: 840px; right: 2%; }
-
-        /* Secret psychological overlay canvas - locks perfectly over screen bounds during melt */
-        #psycho-canvas {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 99999; display: none;
-        }
-        #psycho-deck { display: none; }
     </style>
 </head>
 <body id="terminal-body" bgcolor="#000000" text="#FF0000" link="#0000FF" vlink="#800080" alink="#FF00FF">
 
-    <!-- Screen-melting animation overlay workspace -->
-    <canvas id="psycho-canvas"></canvas>
+    <!-- SYMMETRIC MARGIN GRAPHICS (Optimized to your 140px preference) -->
+    <div class="float-gif-left1"><img src="IMG1.gif" alt="[X]" width="140"></div>
+    <div class="float-gif-left2"><img src="IMG2.gif" alt="[X]" width="140"></div>
+    <div class="float-gif-left3"><img src="IMG3.gif" alt="[X]" width="140"></div>
     
-    <!-- Secondary internal loader frame box used by the error flood module -->
-    <iframe id="psycho-deck" src="about:blank"></iframe>
-
-    <!-- SYMMETRIC MARGIN GRAPHICS (Optimized to your 145px preference) -->
-    <div class="float-gif-left1"><img src="IMG1.gif" alt="[X]" width="145"></div>
-    <div class="float-gif-left2"><img src="IMG2.gif" alt="[X]" width="145"></div>
-    <div class="float-gif-left3"><img src="IMG3.gif" alt="[X]" width="145"></div>
-    
-    <div class="float-gif-right1"><img src="IMG4.gif" alt="[X]" width="145"></div>
-    <div class="float-gif-right2"><img src="IMG5.gif" alt="[X]" width="145"></div>
-    <div class="float-gif-right3"><img src="IMG6.gif" alt="[X]" width="145"></div>
+    <div class="float-gif-right1"><img src="IMG4.gif" alt="[X]" width="140"></div>
+    <div class="float-gif-right2"><img src="IMG5.gif" alt="[X]" width="140"></div>
+    <div class="float-gif-right3"><img src="IMG6.gif" alt="[X]" width="140"></div>
 
     <center>
         <br><br>
@@ -126,7 +114,7 @@
         <table border="4" bordercolor="#800080" bgcolor="#220022" cellpadding="4">
             <tr>
                 <td align="center">
-                    <button onclick="triggerPsychologicalEvent()" style="background-color: #800080; color: #FF0000; font-family: 'Comic Sans MS', cursive; font-size: 16px; font-weight: bold; letter-spacing: 1px; padding: 6px 20px; border: 4px outset #AA00AA; cursor: pointer; text-shadow: 1px 1px #000000;">
+                    <button onclick="triggerChaoticRoulette()" style="background-color: #800080; color: #FF0000; font-family: 'Comic Sans MS', cursive; font-size: 16px; font-weight: bold; letter-spacing: 1px; padding: 6px 20px; border: 4px outset #AA00AA; cursor: pointer; text-shadow: 1px 1px #000000;">
                         <span class="retro-blink">!!CLICK ME!!</span>
                     </button>
                 </td>
@@ -144,90 +132,14 @@
         
     </center>
 
-    <!-- NATIVE EXPERIMENTAL CORE AUDIO/VISUAL ROUTER -->
+    <!-- CHAOTIC PSYCHOLOGICAL INFECTION SYSTEM ROULETTE -->
     <script>
-        let currentFileIdx = 1;
-        let meltAnimationId = null; // Holds the animation track loop reference
-        
-        function triggerPsychologicalEvent() {
-            // ROUTING BREAKOUT: Redirects browser immediately on stage 3
-            if (currentFileIdx === 3) {
-                window.location.href = "FUN3.html";
-                return;
-            }
-
-            // NATIVE GLITCH MELTER LOOP
-            if (currentFileIdx === 1) {
-                const canvas = document.getElementById('psycho-canvas');
-                const ctx = canvas.getContext('2d');
-                
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                canvas.style.display = "block";
-
-                // Procedurally sketch a digital vector map matching your layout
-                ctx.fillStyle = "#000000";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.fillStyle = "#000022";
-                ctx.strokeStyle = "#FF0000";
-                ctx.lineWidth = 6;
-                
-                const boxW = canvas.width * 0.50;
-                const boxX = (canvas.width - boxW) / 2;
-                ctx.fillRect(boxX, 350, boxW, 120);
-                ctx.strokeRect(boxX, 350, boxW, 120);
-
-                ctx.fillStyle = "#FF0000";
-                ctx.font = "bold 40px Times New Roman";
-                ctx.fillText("SILVER SHADOW", canvas.width/2 - 160, 100);
-                
-                ctx.fillStyle = "#0000FF";
-                ctx.font = "16px Courier New";
-                ctx.fillText("::: UNDER CONSTRUCTION :::", canvas.width/2 - 120, 140);
-
-                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const columns = [];
-                for (let i = 0; i < canvas.width; i += 3) {
-                    columns.push({ x: i, y: 0, speed: Math.random() * 6 + 3, delay: Math.random() * 20 });
-                }
-
-                // Hide original elements
-                document.getElementById('main-title').style.visibility = "hidden";
-                document.getElementById('marquee-table').style.visibility = "hidden";
-                
-                function meltAnimation() {
-                    columns.forEach(c => {
-                        if (c.delay-- <= 0 && c.y < canvas.height) {
-                            ctx.putImageData(imgData, 0, c.y, c.x, 0, 3, canvas.height);
-                            c.y += c.speed;
-                        }
-                    });
-                    meltAnimationId = requestAnimationFrame(meltAnimation);
-                }
-                meltAnimation();
-
-                currentFileIdx = 2; // Increments forward to activate stage 2 next
-                return;
-            }
-
-            // CLEAN-UP STAGE 2: If moving to stage 2, instantly kill the melt screen so error popups can show!
-            if (currentFileIdx === 2) {
-                if (meltAnimationId) { cancelAnimationFrame(meltAnimationId); }
-                
-                // Completely hide the melting layer canvas and bring your original text back to life
-                const canvas = document.getElementById('psycho-canvas');
-                canvas.style.display = "none";
-                document.getElementById('main-title').style.visibility = "visible";
-                document.getElementById('marquee-table').style.visibility = "visible";
-            }
-
-            // Runtime loader path for Stage 2 (Windows warning popup replication injection loops)
-            const frame = document.getElementById('psycho-deck');
-            frame.src = "FUN" + currentFileIdx + ".html";
+        function triggerChaoticRoulette() {
+            // Generates a completely random integer selection roll between 1 and 3
+            const randomRoll = Math.floor(Math.random() * 3) + 1;
             
-            currentFileIdx++;
-            if(currentFileIdx > 5) { currentFileIdx = 1; }
+            // Instantly shatters the page envelope and forces a direct subpage layout redirect
+            window.location.href = "FUN" + randomRoll + ".html";
         }
     </script>
 
