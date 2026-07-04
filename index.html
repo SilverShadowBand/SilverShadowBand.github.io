@@ -2,8 +2,6 @@
 <html>
 <head>
     <title>SILVER SHADOW</title>
-    <!-- Injects the screenshot canvas engine cleanly directly into the main frame layout context -->
-    <script src="https://cloudflare.com"></script>
     <style>
         /* Forces crisp, brutal pixelation on your 16-color GIFs instead of modern blurring */
         img {
@@ -28,23 +26,11 @@
         .float-gif-right2 { position: absolute; top: 500px; right: 1%; }
         .float-gif-right3 { position: absolute; top: 840px; right: 2%; }
 
-        /* Secret psychological overlay layer - used dynamically by the built-in native melt logic */
+        /* Secret psychological overlay canvas - locks perfectly over screen bounds during melt */
         #psycho-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 99999; display: none;
         }
         #psycho-deck { display: none; }
-
-        /* MOBILE FIX STYLE: On narrow screens, dynamically push items vertically to protect copyrights */
-        @media screen and (max-width: 768px) {
-            .float-gif-left1, .float-gif-left2, .float-gif-left3,
-            .float-gif-right1, .float-gif-right2, .float-gif-right3 {
-                position: relative !important; top: auto !important; left: auto !important; right: auto !important;
-                display: inline-block; margin: 15px 10px;
-            }
-            .mobile-image-group {
-                display: flex; justify-content: center; flex-wrap: wrap; width: 90%; margin: 10px 0;
-            }
-        }
     </style>
 </head>
 <body id="terminal-body" bgcolor="#000000" text="#FF0000" link="#0000FF" vlink="#800080" alink="#FF00FF">
@@ -158,61 +144,78 @@
         
     </center>
 
-    <!-- BUILT-IN NATIVE CONTROLLER ENGINE -->
+    <!-- NATIVE EXPERIMENTAL CORE AUDIO/VISUAL ROUTER -->
     <script>
         let currentFileIdx = 1;
         
         function triggerPsychologicalEvent() {
-            // ROUTING REDIRECT: If execution index hits slot 3, breakout immediately to a standalone dedicated layout window
+            // ROUTING BREAKOUT: Redirects browser immediately on stage 3
             if (currentFileIdx === 3) {
                 window.location.href = "FUN3.html";
                 return;
             }
 
-            // BUILT-IN NATIVE MELTING PATHWAY
+            // NATIVE GLITCH MELTER LOOP (Completely independent of third-party screenshot limitations)
             if (currentFileIdx === 1) {
                 const canvas = document.getElementById('psycho-canvas');
                 const ctx = canvas.getContext('2d');
-                const mainTerminal = document.getElementById('terminal-body');
+                
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                canvas.style.display = "block";
 
-                // FIX: Added 'ignoreElements' to skip external files that cause browser security crashes
-                html2canvas(mainTerminal, { 
-                    backgroundColor: '#000000', 
-                    logging: false,
-                    ignoreElements: function(element) {
-                        // Safely bypasses the margin image elements to keep the code from freezing
-                        return element.tagName === 'IMG' && element.src.includes('IMG');
-                    }
-                }).then(capturedCanvas => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                    canvas.style.display = "block";
-                    
-                    const columns = [];
-                    for (let i = 0; i < canvas.width; i += 2) {
-                        columns.push({ x: i, y: 0, speed: Math.random() * 5 + 2, delay: Math.random() * 25 });
-                    }
+                // Step 1: Procedurally sketch a digital vector map matching your layout data variables
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                    function executeMeltLoop() {
-                        columns.forEach(c => {
-                            if (c.delay-- <= 0) {
-                                ctx.drawImage(capturedCanvas, c.x, 0, 2, canvas.height, c.x, c.y, 2, canvas.height);
-                                c.y += c.speed;
-                            }
-                        });
-                        requestAnimationFrame(executeMeltLoop);
-                    }
-                    executeMeltLoop();
-                }).catch(err => {
-                    // Fail-safe redirect if the device completely blocks canvas operations
-                    window.parent.document.getElementById('psycho-deck').src = "FUN1.html";
-                });
+                // Re-draws matching red/blue/purple console bars directly onto the animation layer context
+                ctx.fillStyle = "#000022";
+                ctx.strokeStyle = "#FF0000";
+                ctx.lineWidth = 6;
+                
+                // Draw mimicking center layout elements onto the animation block
+                const boxW = canvas.width * 0.50;
+                const boxX = (canvas.width - boxW) / 2;
+                ctx.fillRect(boxX, 350, boxW, 120);
+                ctx.strokeRect(boxX, 350, boxW, 120);
 
-                currentFileIdx = 2; // Increments to slot 2 for the next button click prompt
+                // Generate matrix string parameters to represent text lines
+                ctx.fillStyle = "#FF0000";
+                ctx.font = "bold 40px Times New Roman";
+                ctx.fillText("SILVER SHADOW", canvas.width/2 - 160, 100);
+                
+                ctx.fillStyle = "#0000FF";
+                ctx.font = "16px Courier New";
+                ctx.fillText("::: UNDER CONSTRUCTION :::", canvas.width/2 - 120, 140);
+
+                // Step 2: Slice the procedural canvas and drop columns at random velocities
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const columns = [];
+                for (let i = 0; i < canvas.width; i += 3) {
+                    columns.push({ x: i, y: 0, speed: Math.random() * 6 + 3, delay: Math.random() * 20 });
+                }
+
+                // Hide original HTML tags out of sight instantly to make the canvas breakdown look seamless
+                document.getElementById('main-title').style.visibility = "hidden";
+                document.getElementById('marquee-table').style.visibility = "hidden";
+                
+                function meltAnimation() {
+                    columns.forEach(c => {
+                        if (c.delay-- <= 0 && c.y < canvas.height) {
+                            // Grabs vertical pixel columns and drags them downward across your backdrop space
+                            ctx.putImageData(imgData, 0, c.y, c.x, 0, 3, canvas.height);
+                            c.y += c.speed;
+                        }
+                    });
+                    requestAnimationFrame(meltAnimation);
+                }
+                meltAnimation();
+
+                currentFileIdx = 2; // Increments forward to activate FUN2.html on next prompt
                 return;
             }
 
-            // Fallback runtime file execution path for module 2 (Error popup injection system)
+            // Runtime loader framework path for Stage 2 (Windows warning popup replication injection loops)
             const frame = document.getElementById('psycho-deck');
             frame.src = "FUN" + currentFileIdx + ".html";
             
