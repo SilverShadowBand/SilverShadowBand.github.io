@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SILVER SHADOW</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background-color: #000000;
+        }
+        img {
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+        canvas {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 10;
+        }
+        /* Static clone layout layers forced underneath canvas matrix to bypass browser locks */
+        .float-gif-left1  { position: absolute; top: 160px; left: 2%; z-index: 1; }
+        .float-gif-left2  { position: absolute; top: 500px; left: 1%; z-index: 1; }
+        .float-gif-left3  { position: absolute; top: 840px; left: 2%; z-index: 1; }
+        .float-gif-right1 { position: absolute; top: 160px; right: 2%; z-index: 1; }
+        .float-gif-right2 { position: absolute; top: 500px; right: 1%; z-index: 1; }
+        .float-gif-right3 { position: absolute; top: 840px; right: 2%; z-index: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- PHOTO CLONES: Rendered at 130px underneath the liquify simulation layers -->
+    <div class="float-gif-left1"><img src="IMG1.gif" alt="[X]" width="130"></div>
+    <div class="float-gif-left2"><img src="IMG2.gif" alt="[X]" width="130"></div>
+    <div class="float-gif-left3"><img src="IMG3.gif" alt="[X]" width="130"></div>
+    <div class="float-gif-right1"><img src="IMG4.gif" alt="[X]" width="130"></div>
+    <div class="float-gif-right2"><img src="IMG5.gif" alt="[X]" width="130"></div>
+    <div class="float-gif-right3"><img src="IMG6.gif" alt="[X]" width="130"></div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Vector-clones your complete center console layout elements
+        ctx.fillStyle = "transparent";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw upper marquee block
+        ctx.fillStyle = "#000000";
+        ctx.strokeStyle = "#0000FF";
+        ctx.lineWidth = 2;
+        const marW = canvas.width * 0.85;
+        const marX = (canvas.width - marW) / 2;
+        ctx.fillRect(marX, 180, marW, 35);
+        ctx.strokeRect(marX, 180, marW, 35);
+
+        // Draw central container box table structure
+        ctx.fillStyle = "#000022";
+        ctx.strokeStyle = "#FF0000";
+        ctx.lineWidth = 6;
+        const boxW = Math.min(canvas.width * 0.50, 500);
+        const boxX = (canvas.width - boxW) / 2;
+        ctx.fillRect(boxX, 260, boxW, 120);
+        ctx.strokeRect(boxX, 260, boxW, 120);
+
+        // Draw buttons below center container
+        ctx.fillStyle = "#000000";
+        ctx.strokeStyle = "#FF0000";
+        ctx.lineWidth = 3;
+        ctx.fillRect(canvas.width/2 - 50, 420, 100, 45);
+        ctx.strokeRect(canvas.width/2 - 50, 420, 100, 45);
+
+        ctx.strokeStyle = "#0000FF";
+        ctx.lineWidth = 2;
+        ctx.fillRect(canvas.width/2 - 60, 490, 120, 35);
+        ctx.strokeRect(canvas.width/2 - 60, 490, 120, 35);
+
+        ctx.fillStyle = "#220022";
+        ctx.strokeStyle = "#800080";
+        ctx.lineWidth = 4;
+        ctx.fillRect(canvas.width/2 - 80, 550, 160, 35);
+        ctx.strokeRect(canvas.width/2 - 80, 550, 160, 35);
+
+        // Render titles, headlines, text strings
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "bold 42px Times New Roman";
+        ctx.textAlign = "center";
+        ctx.fillText("SILVER SHADOW", canvas.width / 2, 105);
+        
+        ctx.fillStyle = "#0000FF";
+        ctx.font = "14px Courier New";
+        ctx.fillText("::: UNDER CONSTRUCTION :::", canvas.width / 2, 140);
+
+        ctx.fillStyle = "#800080";
+        ctx.font = "bold 24px Times New Roman";
+        ctx.fillText("COMING SOON", canvas.width / 2, 330);
+
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "14px Courier New";
+        ctx.fillText("OVERVIEW", canvas.width / 2, 512);
+        ctx.font = "bold 14px Comic Sans MS";
+        ctx.fillText("!!CLICK ME!!", canvas.width / 2, 572);
+
+        // Slice up the canvas grid layers
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const columns = [];
+        for (let i = 0; i < canvas.width; i += 3) {
+            columns.push({ x: i, y: 0, speed: Math.random() * 6 + 3, delay: Math.random() * 15 });
+        }
+
+        function melt() {
+            columns.forEach(c => {
+                if (c.delay-- <= 0 && c.y < canvas.height) {
+                    ctx.putImageData(imgData, 0, c.y, c.x, 0, 3, canvas.height);
+                    c.y += c.speed;
+                }
+            });
+            requestAnimationFrame(melt);
+        }
+        
+        setTimeout(melt, 150);
+    </script>
+</body>
+</html>
